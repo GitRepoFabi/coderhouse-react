@@ -12,35 +12,24 @@ import {
   Stack,
   useColorMode,
   Center
-} from '@chakra-ui/react'
-import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
+} from '@chakra-ui/react';
+import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { CartWidget } from '../CartWidget';
-
-//Datos falsos para luego cambiarlo por alguna API:
-const FAKE_CATEGORIES = [
-  {
-    id: '1',
-    label: 'Tecnología'
-  },
-  {
-    id: '2',
-    label: 'Electrodomésticos'
-  },
-  {
-    id: '3',
-    label: 'PC'
-  },
-  {
-    id: '4',
-    label: 'Hogar'
-  },
-  {
-    id: '5',
-    label: 'Herramientas'
-  }
-]
+import { useState,useEffect } from 'react';
+import { getCategories } from '../../services';
 
 export const NavBar = () => {
+
+  const [categories, setCategories] = useState();
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(()=> {
+    getCategories().then((res) => {
+      setCategories(res.data)
+    }).catch((error) => console.error(error))
+    .finally(() => setLoading(false))
+  }, [])
+
   const { colorMode, toggleColorMode } = useColorMode()
   return (
     <>
@@ -51,10 +40,12 @@ export const NavBar = () => {
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               Categorías
             </MenuButton>
-            <MenuList>
-              {FAKE_CATEGORIES.map((cat) => {
-                return <MenuItem key={cat.id}>{cat.label}</MenuItem>;
-              })}
+            <MenuList overflowY={'scroll'} maxHeight={'400px'}>
+              {!loading ?
+                categories.map((category) => {
+                  return <MenuItem key={category.slug}>{category.name}</MenuItem>
+                }) : null }
+
             </MenuList>
           </Menu>
           <Flex alignItems={'center'}>
