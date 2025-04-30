@@ -17,6 +17,7 @@ import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { CartWidget } from '../CartWidget';
 import { useState,useEffect } from 'react';
 import { getCategories } from '../../services';
+import { Link } from 'react-router-dom';
 
 export const NavBar = () => {
 
@@ -43,9 +44,8 @@ export const NavBar = () => {
             <MenuList overflowY={'scroll'} maxHeight={'400px'}>
               {!loading ?
                 categories.map((category) => {
-                  return <MenuItem key={category.slug}>{category.name}</MenuItem>
+                  return <Link to={`/category/${category.slug}`} key={category.slug}><MenuItem>{category.name}</MenuItem></Link>
                 }) : null }
-
             </MenuList>
           </Menu>
           <Flex alignItems={'center'}>
