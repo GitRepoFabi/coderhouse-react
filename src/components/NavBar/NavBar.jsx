@@ -15,25 +15,14 @@ import {
 } from '@chakra-ui/react';
 import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { CartWidget } from '../CartWidget';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getCategories } from '../../services';
 import { Link } from 'react-router-dom';
 import { useCategories } from '../../hooks';
 
 export const NavBar = () => {
 
-  // const [categories, setCategories] = useState();
-  // const [categories, setCategories] = useCategories();
-
-    const { categories, loading } = useCategories();
-  // const [loading, setLoading] = useState(true);
-  
-  // useEffect(()=> {
-  //   getCategories().then((res) => {
-  //     setCategories(res.data)
-  //   }).catch((error) => console.error(error))
-  //   .finally(() => setLoading(false))
-  // }, [])
+  const { categories, loading } = useCategories();
 
   const { colorMode, toggleColorMode } = useColorMode()
   return (
@@ -49,11 +38,11 @@ export const NavBar = () => {
               {!loading ?
                 categories.map((category) => {
                   return <Link to={`/category/${category.slug}`} key={category.slug}><MenuItem>{category.name}</MenuItem></Link>
-                }) : null }
+                }) : null}
             </MenuList>
           </Menu>
           <Flex alignItems={'center'}>
-          <CartWidget/>
+            <CartWidget />
             <Stack direction={'row'} spacing={7}>
               <Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
