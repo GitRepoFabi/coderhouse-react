@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
     Box,
     Heading,
@@ -16,8 +15,11 @@ import {
 } from "@chakra-ui/react";
 import { MinusIcon, AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useProductsStore } from "../store";
+import { useTitle } from "../hooks";
 
 export const Cart = () => {
+
+    useTitle({title:"Carrito"});
 
     const cartState = useProductsStore((state) => state.cart);
     const addItem = useProductsStore((state) => state.addProductToCart);

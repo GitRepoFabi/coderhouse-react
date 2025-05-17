@@ -18,18 +18,22 @@ import { CartWidget } from '../CartWidget';
 import { useState,useEffect } from 'react';
 import { getCategories } from '../../services';
 import { Link } from 'react-router-dom';
+import { useCategories } from '../../hooks';
 
 export const NavBar = () => {
 
-  const [categories, setCategories] = useState();
-  const [loading, setLoading] = useState(true);
+  // const [categories, setCategories] = useState();
+  // const [categories, setCategories] = useCategories();
+
+    const { categories, loading } = useCategories();
+  // const [loading, setLoading] = useState(true);
   
-  useEffect(()=> {
-    getCategories().then((res) => {
-      setCategories(res.data)
-    }).catch((error) => console.error(error))
-    .finally(() => setLoading(false))
-  }, [])
+  // useEffect(()=> {
+  //   getCategories().then((res) => {
+  //     setCategories(res.data)
+  //   }).catch((error) => console.error(error))
+  //   .finally(() => setLoading(false))
+  // }, [])
 
   const { colorMode, toggleColorMode } = useColorMode()
   return (

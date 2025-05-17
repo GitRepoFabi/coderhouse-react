@@ -1,14 +1,47 @@
 import { useEffect, useState } from "react"
-import { getProductById, getProductsByCategory } from "../services";
+import { db, getProductsByCategory } from "../services";
+import { collection, getDoc, doc, getDocs, query, where } from "firebase/firestore";
+
+export const useProducts = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const collectionName = collection(db, "products");
+        getDocs(collectionName)
+            .then((snapshot) => {
+                const data = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setProducts(data);
+            })
+            .catch((error) => console.error(error))
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    return { products, loading, setLoading, setProducts };
+};
+
 
 export const useProductsByCategory = (id) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(()=> {
-        getProductsByCategory(id)
-        .then((res) => {
-            setProducts(res.data.products);
+    useEffect(() => {
+        // getProductsByCategory(id)
+        const q = query(
+            collection(db, "products"),
+            where("category", "==", id)
+        )
+        getDocs(q)
+        .then((snapshot) => {
+            const data = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setProducts(data);
         })
         .catch((error) => {
             console.error(error);
@@ -16,7 +49,7 @@ export const useProductsByCategory = (id) => {
         .finally(() => setLoading(false))
     }, [id])
 
-    return {products, loading};
+    return { products, loading };
 }
 
 export const useProductById = (id) => {
@@ -24,15 +57,18 @@ export const useProductById = (id) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getProductById(id)
-        .then((res) => {
-            setProduct(res.data);
-        })
-        .catch((error) => {
-            console.error(error);
-        })
-        .finally(() => setLoading(false))
-    },[id])
+        // getProductById(id)
+        const productQuery = doc(db, "products", id);
+        getDoc(productQuery)
 
-    return {product, loading}
+            .then((snapshot) => {
+                setProduct({ id: snapshot.id, ...snapshot.data() });
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+            .finally(() => setLoading(false))
+    }, [id])
+
+    return { product, loading }
 }

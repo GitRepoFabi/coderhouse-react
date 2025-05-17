@@ -1,24 +1,15 @@
 import { Button, Container, Flex, Input } from "@chakra-ui/react"
-import { ItemListContainer, Loader, NavBar } from "../components"
+import { ItemListContainer, Loader } from "../components"
 import { getProducts, searchProducts } from "../services/queries";
 import { useEffect, useState } from "react";
+import {useProducts, useTitle} from "../hooks"
 
 export const Home = () => {
 
-    const [products, setProducts] = useState([]);  //Para mostrar los productos
-    const [loading, setLoading] = useState(true); //Para que muestre el cargando mientras carga la API
-    const [search, setSearch] = useState(""); //Para almacenar la búsqueda del usaurio
-  
-    useEffect(() => {
-      getProducts()
-        .then((res) => {
-          setProducts(res.data.products)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-        .finally(() => setLoading(false));
-    }, []);
+  const { products, loading, setProducts, setLoading } = useProducts();
+    const [search, setSearch] = useState(""); //Para almacenar la búsqueda del usuario
+
+    useTitle({title:'Inicio'});
   
     //Constante creada para la búsqueda de productos
     const handleclickSearch = () => {

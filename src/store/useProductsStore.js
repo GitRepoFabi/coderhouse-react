@@ -52,7 +52,6 @@ export const useProductsStore = create((set) => ({
         }
     }),
 
-
     getTotalItems: () => {
         const state = useProductsStore.getState()
         return state.cart.reduce((total, item) => total + item.quantity, 0)
