@@ -15,8 +15,9 @@ import {
   ListItem,
 } from '@chakra-ui/react'
 import { MdLocalShipping } from 'react-icons/md'
+import { Counter } from '../Counter';
 
-export const ItemDetailContainer = ({product}
+export const ItemDetailContainer = ({ product }
 ) => {
 
   console.log(product);
@@ -95,13 +96,13 @@ export const ItemDetailContainer = ({product}
                   <Text as={'span'} fontWeight={'bold'}>
                     Width:
                   </Text>{' '}
-                 {product.dimensions.width}
+                  {product.dimensions.width}
                 </ListItem>
               </List>
             </Box>
           </Stack>
 
-          <Button
+          {/*           <Button
             rounded={'none'}
             w={'full'}
             mt={8}
@@ -115,7 +116,8 @@ export const ItemDetailContainer = ({product}
               boxShadow: 'lg',
             }}>
             Add to cart
-          </Button>
+          </Button> */}
+          <Counter product={product}/>
         </Stack>
       </SimpleGrid>
     </Container>

@@ -5,3 +5,4 @@ export * from './ItemDetailContainer';
 export * from './Loader';
 export * from './ProductCard';
 export * from '../hooks';
+export * from './Counter';

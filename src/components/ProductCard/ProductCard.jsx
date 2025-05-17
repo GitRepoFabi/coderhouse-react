@@ -51,7 +51,7 @@ export function Rating({ rating }) {
   )
 }
 
-export function ProductCard({product}) {
+export function ProductCard({ product }) {
 
   const navigate = useNavigate()
 
@@ -70,9 +70,9 @@ export function ProductCard({product}) {
 
         <Box p="6">
           <Box display="flex" alignItems="baseline">
-              <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                New
-              </Badge>
+            <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
+              New
+            </Badge>
           </Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
@@ -105,9 +105,8 @@ export function ProductCard({product}) {
             </Box>
           </Flex>
         </Box>
-        <Button margin={'10px'} onClick={()=> navigate(`/item/${product.id}`)}> Ir a Detalle</Button>
+        <Button margin={'10px'} onClick={() => navigate(`/item/${product.id}`)}> Ir a Detalle</Button>
       </Box>
-      
     </Flex>
   )
 }
