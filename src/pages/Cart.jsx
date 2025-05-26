@@ -16,6 +16,7 @@ import {
 import { MinusIcon, AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useProductsStore } from "../store";
 import { useTitle } from "../hooks";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Cart = () => {
 
@@ -30,6 +31,8 @@ export const Cart = () => {
     const handleDeleteItem = (itemId) => {
         deleteProductFromcart(itemId);
     };
+
+    const navigate = useNavigate();
 
     return (
         <Box p={6} maxW="800px" mx="auto" h={"90vh"}>
@@ -107,6 +110,7 @@ export const Cart = () => {
                             Total: ${total.toFixed(2)}
                         </Text>
                         <Spacer />
+                    <Button onClick={() => navigate("/checkout")}>Finalizar compra</Button>
                     </Flex>
                 </VStack>
             )}

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Cart, Category, Home, Item } from '../pages';
+import { Cart, Category, Checkout, Home, Item } from '../pages';
 import { MainLayout } from "../layout";
 
 //Se configuran las rutas solicitadas en la segunda pre-entrega
@@ -23,7 +23,12 @@ const routes = [
             {
                 path: "/cart/",
                 element: <Cart />
+            },
+            {
+                path: "/checkout/",
+                element: <Checkout />
             }
+
         ]
     }
 ];
