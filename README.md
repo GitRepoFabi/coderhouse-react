@@ -3,7 +3,7 @@
 
 Objetivo:
 
-- Desarrollarás una app de un e-commerce para poder vender productos de un rubro a elección
+- Desarrollar una app de un e-commerce para poder vender productos de un rubro a elección
 
 Componentes a entregar:
 - Navbar
