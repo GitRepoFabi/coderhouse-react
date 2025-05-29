@@ -27,7 +27,8 @@ Componentes a entregar:
 
 **Finalizar compra:**
 
-![image](https://github.com/user-attachments/assets/3a4b7ddd-8431-479d-bd51-22df6d5e17bc)
+![image](https://github.com/user-attachments/assets/4f3387a1-0f37-437f-a285-24d64cf97997)
+
 
 **Alerta finalizada la compra:**
 
