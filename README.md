@@ -105,3 +105,9 @@ Para ejecutar este proyecto, deberá agregar las siguientes variables de entorno
 **Servidor BD:** 
 
 - Firestore Database
+  
+## Feedback
+
+Si tiene algún comentario acerca del proyecto, comuníquese conmigo a fabianlarrosa2013@gmail.com
+
+Copyright © 2025, Fabián Larrosa. Reservados todos los derechos.
