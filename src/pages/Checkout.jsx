@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { Button, Input } from "@chakra-ui/react";
+import { Box, Button, FormControl, Input, Text,VStack } from "@chakra-ui/react";
 import { db } from "../services";
 import { useProductsStore } from "../store";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useTitle } from "../hooks";
 
 export const Checkout = () => {
+
+    useTitle({ title: "Checkout" });
 
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -51,11 +54,50 @@ export const Checkout = () => {
     };
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)}>
-            <Input type='text' placeholder='Nombre' onChange={(e) => { setForm({ ...form, name: e.target.value }) }} />
-            <Input type='phone' placeholder='Telefono' onChange={(e) => { setForm({ ...form, phone: e.target.value }) }} />
-            <Input type='email' placeholder='Correo electrónico' onChange={(e) => { setForm({ ...form, email: e.target.value }) }} />
-            <Button type='submit'>Comprar</Button>
-        </form>
+        <Box maxW="md" mx="auto" mt={8} p={6} borderWidth={1} borderRadius="lg">
+            <form onSubmit={(e) => handleSubmit(e)}>
+                <VStack spacing={6}>
+                    <Text fontSize={"2xl"} mb={"5px"} fontWeight={"800"}>
+                        Finalizar Compra
+                    </Text>
+                    <FormControl isRequired>
+                        <Text mb={"5px"}>Nombre completo</Text>
+                        <Input
+                            type={"text"}
+                            onChange={(e) => {
+                                setForm({ ...form, name: e.target.value });
+                            }}
+                            placeholder="Nombre"
+                        />
+                    </FormControl>
+
+                    <FormControl isRequired>
+                        <Text mb={"5px"}>Teléfono</Text>
+                        <Input
+                            type={"phone"}
+                            onChange={(e) => {
+                                setForm({ ...form, phone: e.target.value });
+                            }}
+                            placeholder="Teléfono"
+                        />
+                    </FormControl>
+
+                    <FormControl isRequired>
+                        <Text mb={"5px"}>Correo electrónico</Text>
+                        <Input
+                            type={"email"}
+                            onChange={(e) => {
+                                setForm({ ...form, email: e.target.value });
+                            }}
+                            placeholder="Correo electrónico"
+                        />
+                    </FormControl>
+
+                    <Button type="submit" colorScheme="blue">
+                        Comprar
+                    </Button>
+                </VStack>
+            </form>
+        </Box>
     )
 }
