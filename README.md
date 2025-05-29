@@ -104,4 +104,4 @@ Para ejecutar este proyecto, deberá agregar las siguientes variables de entorno
 
 **Servidor BD:** 
 
-- Firebase
+- Firestore Database
