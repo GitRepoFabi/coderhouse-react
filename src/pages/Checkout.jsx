@@ -20,6 +20,7 @@ export const Checkout = () => {
 
     const cartState = useProductsStore(state => state.cart)
     const total = useProductsStore(state => state.getTotalPrice())
+    const deleteProductFromcart = useProductsStore((state) => state.deleteProductFromcart);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,6 +39,7 @@ export const Checkout = () => {
 
         addDoc(collectionName, data)
             .then(({ id }) => {
+                cartState.map((item) => (deleteProductFromcart(item.id)))
                 Swal.fire({
                     title: "Compra exitosa!",
                     text: `Por cualquier reclamo, indicar el siguiente número de compra: ${id}`,
